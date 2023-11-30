@@ -16,6 +16,7 @@ const auth_mw = require("./middlewares/auth/auth_mw");
 const path = require("path");
 const isAuthSuperUser = require("./middlewares/auth/isAuthSuperUser_mw");
 
+
 const app = express();
 
 app.use(cors_mw);
@@ -30,6 +31,7 @@ app.use(bp.urlencoded({ extended: true }));
 
 app.use("/admin", auth);
 
+
 if (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "client/dist")));
   
@@ -43,6 +45,7 @@ app.use(csrf_mw);
 
 app.use("/admin", isAuthUser, orderRoutes);
 app.use("/admin/management", isAuthSuperUser, userRoutes);
+
 
 app.use("*", (req, res, next) =>
   sendError("Page Not Found", "fail", 404, next)
