@@ -14,6 +14,7 @@ const isAuthUser = require("./middlewares/auth/isAuthUser_mw");
 const auth_mw = require("./middlewares/auth/auth_mw");
 const path = require("path");
 
+
 const app = express();
 
 app.use(cors_mw);
@@ -21,6 +22,7 @@ app.use(cors_mw);
 app.use(session_mw);
 
 app.use(helmet());
+
 app.use(express.json());
 app.use(cookieParser(process.env.SESS_SECRET));
 app.use(bp.urlencoded({ extended: true }));
@@ -34,12 +36,14 @@ if (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "production") {
 
 app.use("/admin", auth);
 
+
 app.use(auth_mw);
 
 app.use(csrf_mw);
 
 app.use("/admin", isAuthUser, orderRoutes);
 app.use("/admin/management", isAuthUser, userRoutes);
+
 
 app.use("*", (req, res, next) =>
   sendError("Page Not Found", "fail", 404, next)
@@ -52,3 +56,4 @@ const PORT = process.env.PORT || 3005;
 app.listen(PORT, () => {
   console.log(`Server Connection Provided by PORT: ${PORT}`);
 });
+
