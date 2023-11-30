@@ -2,6 +2,7 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../../db/myDB');
 
 
+
 const ShippingEvent = sequelize.define('shipment_events', {
   event_id: {
     type: DataTypes.STRING(255),

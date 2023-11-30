@@ -2,6 +2,7 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../../db/myDB');
 
 
+
 const OrderDetail = sequelize.define('order_details', {
   product_id: {
     type: DataTypes.STRING(255),

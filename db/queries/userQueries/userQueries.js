@@ -1,6 +1,7 @@
 const User = require("../../../models/userModels/user");
 const sequelize = require("../../myDB");
 
+
 class UserQueries {
   constructor(users, userIds, cols) {
     this.users = users;

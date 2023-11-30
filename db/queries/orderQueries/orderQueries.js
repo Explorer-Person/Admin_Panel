@@ -6,6 +6,7 @@ const sequelize = require("../../myDB");
 
 
 
+
 class QueryOrder {
   constructor(order) {
     this.order = order;

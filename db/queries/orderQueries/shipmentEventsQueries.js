@@ -1,5 +1,7 @@
 const ShipmentEvents = require("../../../models/orderModels/shipmentEvents");
+
 const sequelize = require("../../myDB");
+
 
 
 class QueryShipmentEvents {

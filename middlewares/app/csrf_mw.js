@@ -15,7 +15,7 @@ csrf_mw.get('/api/csrf-token', (req,res) => {
         .status(200)
         .json({
           status: "success",
-          msg: "CSRF Token",
+          msg: "Csrf Token Fetched Successfully...",
           csrfToken: storedCsrfToken,
         });
 });

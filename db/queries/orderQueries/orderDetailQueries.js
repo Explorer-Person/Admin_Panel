@@ -1,6 +1,7 @@
 const OrderDetail = require("../../../models/orderModels/orderDetail");
 const sequelize = require("../../myDB");
 
+
 class QueryOrderDetails {
   constructor(orderDetail) {
     this.orderDetail = orderDetail;

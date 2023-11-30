@@ -1,5 +1,6 @@
 const { QueryTypes } = require("sequelize");
 const sequelize = require("../../myDB");
+
 const SuperUser = require("../../../models/userModels/superUser");
 
 class SuperUserQueries {

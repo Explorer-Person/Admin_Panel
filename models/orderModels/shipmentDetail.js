@@ -2,6 +2,7 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../../db/myDB');
 
 
+
 const ShipmentDetail = sequelize.define('shipment_details', {
   tracking_code: {
     type: DataTypes.STRING(255),

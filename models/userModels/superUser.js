@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../../db/myDB');
+
 const {v4:uuidv4} = require('uuid')
 
 const SuperUser = sequelize.define('super_users', {
