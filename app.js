@@ -21,6 +21,7 @@ app.use(cors_mw);
 app.use(session_mw);
 
 app.use(helmet());
+
 app.use(express.json());
 app.use(cookieParser(process.env.SESS_SECRET));
 app.use(bp.urlencoded({ extended: true }));
@@ -52,3 +53,4 @@ const PORT = process.env.PORT || 3005;
 app.listen(PORT, () => {
   console.log(`Server Connection Provided by PORT: ${PORT}`);
 });
+
