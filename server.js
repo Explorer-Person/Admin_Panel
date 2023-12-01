@@ -6,7 +6,6 @@ const orderRoutes = require("./routes/orderRoutes");
 const handleErrors = require("./errors/handleErrors");
 const sendError = require("./errors/sendError");
 const cors_mw = require("./middlewares/app/cors_mw");
-const csrf_mw = require("./middlewares/app/csrfManager_mw");
 const auth = require("./auth/authRoute/authRoutes");
 const session_mw = require("./middlewares/app/sessions_mw");
 const userRoutes = require("./routes/userRoutes");
@@ -28,9 +27,6 @@ app.use(helmet());
 app.use(express.json());
 app.use(cookieParser(process.env.SESS_SECRET));
 app.use(bp.urlencoded({ extended: true }));
-
-
-
 
 app.use(generateCsrf_mw);
 app.use(auth_mw);

@@ -42,7 +42,8 @@ function AppLogic() {
     }else if(authInfo.isAuthUser === true && window.location.href === `${import.meta.env.VITE_SERVER_DOMAIN}/`){
       window.location.assign("/admin/hub");
     }
-  },[authInfo])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
 
   return (
     <div>
