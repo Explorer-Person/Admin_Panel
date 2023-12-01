@@ -29,18 +29,12 @@ export function AdminRoutes() {
   };
 
   useEffect(() => {
-    if(authUser){
+    if (authUser) {
       dispatch(setAuthUser(userAuthInfo));
     }
-    
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[isAuthUser, rootAccess]);
 
-  // useEffect(()=>{
-  //   if(window.location.href === "http://localhost:3030/admin"){
-  //     return window.location.assign("/admin/hub");
-  //   }
-  // },[])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthUser, rootAccess]);
 
   if (authLoading) {
     return <LoadingPage />;
@@ -73,10 +67,12 @@ export function AdminRoutes() {
   );
 
   return !isAuthUser ? (
-    <Route
-      path="*"
-      element={<ErrorPage messageTitle="404" messageBody="Not Authorized!" />}
-    />
+    <Routes>
+      <Route
+        path="*"
+        element={<ErrorPage messageTitle="404" messageBody="Not Authorized!" />}
+      />
+    </Routes>
   ) : (
     adminRoutes
   );

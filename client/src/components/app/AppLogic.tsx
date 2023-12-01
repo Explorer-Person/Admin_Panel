@@ -13,10 +13,11 @@ import SideBarUI from "../componentsUI/componentUIParts/NavbarUIParts/SideBar.UI
 import { useGetCsrfTokenQuery } from "../../redux/apis/getCsrfToken";
 import { useLogoutAdminPanelMutation } from "../../redux/apis/authAdminApi";
 import { RootState } from "../../redux/stores/store";
+import { useEffect } from "react";
 
 function AppLogic() {
   const dispatch = useAppDispatch();
-  const authInfo = useAppSelector((state:RootState)=> state.AuthInfoReducer.userAuthInfo);
+  const authInfo = useAppSelector((state:RootState)=> state.AuthInfoReducer.userAuthInfo)
 
   const toggleSideMenu = () => {
     dispatch(toggleSideBar("-20%"));
@@ -35,6 +36,13 @@ function AppLogic() {
        });
     }
   };
+  useEffect(()=>{
+    if(authInfo.isAuthUser === false && window.location.href === `${import.meta.env.VITE_SERVER_DOMAIN}/`){
+      window.location.assign("/login");
+    }else if(authInfo.isAuthUser === true && window.location.href === `${import.meta.env.VITE_SERVER_DOMAIN}/`){
+      window.location.assign("/admin/hub");
+    }
+  },[authInfo])
 
   return (
     <div>

@@ -264,7 +264,7 @@ const DeleteContentsUI = ({
               open={confirmBoxData.status}
               content={`Are You Sure For Delete Content ${confirmBoxData.id}`}
               onCancel={() => setConfirmBoxData("")}
-              onConfirm={() => deleteContent(confirmBoxData.id)}
+              onConfirm={() => deleteContent(order.root_id)}
               style={{ marginLeft: "25%", marginTop: "15%", height: "20%" }}
             />
           </Container>
