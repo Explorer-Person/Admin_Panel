@@ -32,6 +32,7 @@ app.use(bp.urlencoded({ extended: true }));
 app.use((req, res, next) => {
   if (req.url.endsWith(".js")) {
     res.type("application/javascript");
+    res.sendFile(path.join(__dirname, 'client/dist', req.path));
   }
   next();
 });
