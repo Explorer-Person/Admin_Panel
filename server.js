@@ -28,7 +28,7 @@ app.use(cookieParser(process.env.SESS_SECRET));
 app.use(bp.urlencoded({ extended: true }));
 
 if (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "client/dist/assets"), { headers: { 'Content-Type': 'text/css' } }));
+  app.use(express.static(path.join(__dirname, "client/dist")));
 
   app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "client/dist/index.html"));
