@@ -6,6 +6,5 @@
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME} !-l
   RewriteRule . /index.html [L]
-  AddType application/javascript js jsonp
-	AddType application/json json
+
  
