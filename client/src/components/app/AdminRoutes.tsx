@@ -60,7 +60,7 @@ export function AdminRoutes() {
       />
 
       <Route
-        path="*"
+        path="/*"
         element={<ErrorPage messageTitle="404" messageBody="Page Not Found!" />}
       />
     </Routes>
