@@ -255,16 +255,16 @@ const DeleteContentsUI = ({
               </Badge>
             </Container>
             <Button
-              onClick={() => setConfirmBoxData(order.tracking_code)}
+              onClick={() => setConfirmBoxData(order.root_id)}
               className="m-3 mt-5 h-25 bg-danger"
             >
               x
             </Button>
             <Confirm
               open={confirmBoxData.status}
-              content={`Are You Sure For Delete Content ${confirmBoxData.id}`}
+              content={`Are You Sure For Delete Content ?`}
               onCancel={() => setConfirmBoxData("")}
-              onConfirm={() => deleteContent(order.root_id)}
+              onConfirm={() => deleteContent(confirmBoxData.id)}
               style={{ marginLeft: "25%", marginTop: "15%", height: "20%" }}
             />
           </Container>

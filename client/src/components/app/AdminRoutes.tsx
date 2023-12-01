@@ -43,17 +43,17 @@ export function AdminRoutes() {
   const adminRoutes = (
     <Routes>
       <Route
-        path="/admin/hub"
+        path="/hub"
         element={<HUB_UI rootAccess={userAuthInfo.rootAccess} />}
       />
-      <Route path="/admin/addContent" element={<AddContent />} />
-      <Route path="/admin/updateContents" element={<UpdateContent />} />
-      <Route path="/admin/editContent" element={<EditContent />} />
-      <Route path="/admin/deleteContents" element={<DeleteContents />} />
-      <Route path="/admin/seeContents" element={<SeeContents />} />
-      <Route path="/admin/contentDetail" element={<ContentDetail />} />
+      <Route path="/addContent" element={<AddContent />} />
+      <Route path="/updateContents" element={<UpdateContent />} />
+      <Route path="/editContent" element={<EditContent />} />
+      <Route path="/deleteContents" element={<DeleteContents />} />
+      <Route path="/seeContents" element={<SeeContents />} />
+      <Route path="/contentDetail" element={<ContentDetail />} />
       <Route
-        path="/admin/management"
+        path="/management"
         element={
           !rootAccess ? <HUB_UI rootAccess={rootAccess} /> : <ManagementPanel />
         }

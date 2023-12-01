@@ -13,7 +13,8 @@ import SideBarUI from "../componentsUI/componentUIParts/NavbarUIParts/SideBar.UI
 import { useGetCsrfTokenQuery } from "../../redux/apis/getCsrfToken";
 import { useLogoutAdminPanelMutation } from "../../redux/apis/authAdminApi";
 import { RootState } from "../../redux/stores/store";
-import { useEffect } from "react";
+
+
 
 function AppLogic() {
   const dispatch = useAppDispatch();
@@ -36,14 +37,7 @@ function AppLogic() {
        });
     }
   };
-  useEffect(()=>{
-    if(authInfo.isAuthUser === false && window.location.href === `${import.meta.env.VITE_SERVER_DOMAIN}/`){
-      window.location.assign("/login");
-    }else if(authInfo.isAuthUser === true && window.location.href === `${import.meta.env.VITE_SERVER_DOMAIN}/`){
-      window.location.assign("/admin/hub");
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
+
 
   return (
     <div>
@@ -60,8 +54,9 @@ function AppLogic() {
           onReset={onResetLogic}
         >
           <Routes>
+            <Route path="/" element={<LoginAdmin/>}/>
             <Route path="/login" element={<LoginAdmin />} />
-            <Route path="*" element={<AdminRoutes/>}/>
+            <Route path="/admin/*" element={<AdminRoutes/>}/>
             <Route
               path="*"
               element={
