@@ -28,8 +28,8 @@ app.use(express.json());
 app.use(cookieParser(process.env.SESS_SECRET));
 app.use(bp.urlencoded({ extended: true }));
 
-app.use(generateCsrf_mw);
 app.use(auth_mw);
+app.use(generateCsrf_mw);
 
 app.use("/admin",verifyCsrf_mw, auth);
 app.use("/admin",verifyCsrf_mw, isAuthUser, orderRoutes);
