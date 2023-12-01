@@ -36,13 +36,7 @@ app.use("/admin", verifyCsrf_mw, isAuthUser, orderRoutes);
 app.use("/admin/management", verifyCsrf_mw, isAuthSuperUser, userRoutes);
 
 if (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "production") {
-  // app.disable("etag");
-  app.use((req, res, next) => {
-    if (req.url.endsWith(".js")) {
-      res.type("application/javascript");
-    }
-    next();
-  });  
+  app.disable("etag");
   app.use(express.static(path.join(__dirname, "client/dist")));
   app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "client/dist/index.html"));   
