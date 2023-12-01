@@ -27,14 +27,6 @@ app.use(express.json());
 app.use(cookieParser(process.env.SESS_SECRET));
 app.use(bp.urlencoded({ extended: true }));
 
-app.use("/admin", auth);
-
-app.use(csrf_mw);
-app.use(auth_mw);
-
-app.use("/admin", isAuthUser, orderRoutes);
-app.use("/admin/management", isAuthSuperUser, userRoutes);
-
 if (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/dist")));
 
@@ -43,6 +35,14 @@ if (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "production") {
     res.sendFile(path.join(__dirname, "client/dist/index.html"));
   });
 }
+
+app.use("/admin", auth);
+
+app.use(csrf_mw);
+app.use(auth_mw);
+
+app.use("/admin", isAuthUser, orderRoutes);
+app.use("/admin/management", isAuthSuperUser, userRoutes);
 
 
 app.use("*", (req, res, next) =>
