@@ -29,14 +29,6 @@ app.use(express.json());
 app.use(cookieParser(process.env.SESS_SECRET));
 app.use(bp.urlencoded({ extended: true }));
 
-app.use((req, res, next) => {
-  if (req.url.endsWith(".js")) {
-    res.type("application/javascript");
-    res.sendFile(path.join(__dirname, 'client/dist', req.path));
-  }
-  next();
-});
-
 app.use(auth_mw);
 app.use(generateCsrf_mw);
 
@@ -46,6 +38,10 @@ app.use("/admin/management",verifyCsrf_mw, isAuthSuperUser, userRoutes);
 
 if (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "production") {
   app.disable('etag');
+  app.use((req, res, next) => {
+      res.type("application/javascript");
+      res.sendFile(path.join(__dirname, 'client/dist', req.path));  
+  });
   app.use(express.static(path.join(__dirname, "client/dist")));
   app.get("*", (req, res) => {
      res.sendFile(path.join(__dirname, "client/dist/index.html"));
