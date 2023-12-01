@@ -37,16 +37,14 @@ app.use("/admin/management", verifyCsrf_mw, isAuthSuperUser, userRoutes);
 
 if (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "production") {
   app.disable("etag");
-  app.use((req, res, next) => {
-    if (req.url.endsWith(".js")) {
-      res.type("application/javascript");
-      res.sendFile(path.join(__dirname, "client/dist/assets", req.path));
-    }
-    next();
-  });
+  
   app.use(express.static(path.join(__dirname, "client/dist")));
   app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client/dist/index.html"));
+    if (req.url.endsWith(".js")) {
+      res.type("application/javascript");
+      res.sendFile(path.join(__dirname, "client/dist/index.html"));
+    }
+    res.sendFile(path.join(__dirname, "client/dist/index.html"));   
   });
 }
 
