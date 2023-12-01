@@ -54,6 +54,7 @@ function AppLogic() {
           onReset={onResetLogic}
         >
           <Routes>
+            <Route path="/" element={<LoginAdmin/>}/>
             <Route path="/login" element={<LoginAdmin />} />
             <Route path="/admin/*" element={<AdminRoutes/>}/>
             <Route
