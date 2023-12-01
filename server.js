@@ -18,6 +18,7 @@ const verifyCsrf_mw = require("./middlewares/app/verify_csrf_mw");
 
 const app = express();
 
+
 app.use(cors_mw);
 
 app.use(session_mw);
@@ -27,6 +28,13 @@ app.use(helmet());
 app.use(express.json());
 app.use(cookieParser(process.env.SESS_SECRET));
 app.use(bp.urlencoded({ extended: true }));
+
+app.use((req, res, next) => {
+  if (req.url.endsWith(".js")) {
+    res.type("application/javascript");
+  }
+  next();
+});
 
 app.use(auth_mw);
 app.use(generateCsrf_mw);
