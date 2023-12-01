@@ -36,7 +36,7 @@ app.use("/admin", verifyCsrf_mw, isAuthUser, orderRoutes);
 app.use("/admin/management", verifyCsrf_mw, isAuthSuperUser, userRoutes);
 
 if (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "production") {
-  app.disable("etag");
+  // app.disable("etag");
   app.use((req, res, next) => {
     if (req.url.endsWith(".js")) {
       res.type("application/javascript");
