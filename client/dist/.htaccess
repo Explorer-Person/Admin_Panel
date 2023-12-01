@@ -1,5 +1,4 @@
   # React Router
-  <IfModule mod_mime.c>
   RewriteEngine On
   RewriteBase /
   RewriteRule ^index\.html$ - [L]
@@ -9,4 +8,4 @@
   RewriteRule . /index.html [L]
   AddType application/javascript js jsonp
 	AddType application/json json
-  </IfModule>
+ 

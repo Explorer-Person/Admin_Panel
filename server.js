@@ -40,7 +40,7 @@ if (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "production") {
   app.use((req, res, next) => {
     if (req.url.endsWith(".js")) {
       res.type("application/javascript");
-      res.sendFile(path.join(__dirname, "client/dist", req.path));
+      res.sendFile(path.join(__dirname, "client/dist/assets", req.path));
     }
     next();
   });
