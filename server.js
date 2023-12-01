@@ -6,7 +6,7 @@ const orderRoutes = require("./routes/orderRoutes");
 const handleErrors = require("./errors/handleErrors");
 const sendError = require("./errors/sendError");
 const cors_mw = require("./middlewares/app/cors_mw");
-const csrf_mw = require("./middlewares/app/csrf_mw");
+const csrf_mw = require("./middlewares/app/csrfManager_mw");
 const auth = require("./auth/authRoute/authRoutes");
 const session_mw = require("./middlewares/app/sessions_mw");
 const userRoutes = require("./routes/userRoutes");
@@ -14,6 +14,8 @@ const isAuthUser = require("./middlewares/auth/isAuthUser_mw");
 const auth_mw = require("./middlewares/auth/auth_mw");
 const path = require("path");
 const isAuthSuperUser = require("./middlewares/auth/isAuthSuperUser_mw");
+const generateCsrf_mw = require("./middlewares/app/generate_csrf_mw");
+const verifyCsrf_mw = require("./middlewares/app/verify_csrf_mw");
 
 const app = express();
 
@@ -28,13 +30,14 @@ app.use(cookieParser(process.env.SESS_SECRET));
 app.use(bp.urlencoded({ extended: true }));
 
 
-app.use("/admin", auth);
 
-app.use(csrf_mw);
+
+app.use(generateCsrf_mw);
 app.use(auth_mw);
 
-app.use("/admin", isAuthUser, orderRoutes);
-app.use("/admin/management", isAuthSuperUser, userRoutes);
+app.use("/admin",verifyCsrf_mw, auth);
+app.use("/admin",verifyCsrf_mw, isAuthUser, orderRoutes);
+app.use("/admin/management",verifyCsrf_mw, isAuthSuperUser, userRoutes);
 
 if (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "production") {
   app.disable('etag');
