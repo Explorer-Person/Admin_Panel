@@ -119,10 +119,10 @@ const EditContent = () => {
           const response = result.error.data.errors;
           showMessage(response[0].msg, "error");
         } else if (
-          result.error &&
-          result.error.status === "PARSING_ERROR"
+          result.data &&
+          result.data.status === "success"
         ) {
-          showMessage("Order Successfully Saved!", "success");
+          showMessage(result.data.status.msg, "success");
           return window.location.assign("/admin/updateContents");
         } else if (result.error && result.error.status === "FETCH_ERROR") {
           showMessage("Server Connection Lost", "error");
