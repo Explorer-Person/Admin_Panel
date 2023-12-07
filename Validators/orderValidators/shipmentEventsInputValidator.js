@@ -66,7 +66,7 @@ const validateAddShippingEvents = [
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(403).json({ errors: errors.array() });
     }
     // If validation passes, proceed to the next middleware/route handler
     next();
@@ -118,7 +118,7 @@ const validateUpdateShippingEvents = [
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(403).json({ errors: errors.array() });
     }
 
     next();

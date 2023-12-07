@@ -2,18 +2,26 @@ const SuperUserQueries = require("../../db/queries/userQueries/superUserQueries"
 const UserQueries = require("../../db/queries/userQueries/userQueries");
 const sendError = require("../../errors/sendError");
 const bcrypt = require("bcryptjs");
+const { validationResult } = require("express-validator");
 
 exports.loginAdmin = async (req, res, next) => {
   const { username, password } = await req.body;
   const superUser = await SuperUserQueries.getUser(username);
-  
+
+  const validationErrors = validationResult(req);
+  if (validationErrors.array().length > 0) {
+    return res.status(400).json({ errors: validationErrors.array() });
+  }
+
   UserQueries.getUser(username)
     .then((user) => {
       if (!user && !superUser) {
         return sendError("Username Not Correct", "fail", 401, next);
       }
       const correctPassword =
-        superUser && !user ? superUser.dataValues.password : user.dataValues.password;
+        superUser && !user
+          ? superUser.dataValues.password
+          : user.dataValues.password;
       bcrypt
         .compare(password, correctPassword)
         .then((isCorrect) => {
