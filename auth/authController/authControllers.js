@@ -6,15 +6,16 @@ const { validationResult } = require("express-validator");
 
 exports.loginAdmin = async (req, res, next) => {
   const { username, password } = await req.body;
-  const superUser = await SuperUserQueries.getUser(username);
 
-  const validationErrors = validationResult(req);
-  if (validationErrors.array().length > 0) {
-    return res.status(400).json({ errors: validationErrors.array() });
-  }
+  const superUser = await SuperUserQueries.getUser(username);
 
   UserQueries.getUser(username)
     .then((user) => {
+      const validationErrors = validationResult(req);
+      console.log(validationErrors)
+      if (validationErrors.array().length > 0) {
+        return res.status(403).json({ errors: validationErrors.array() });
+      }
       if (!user && !superUser) {
         return sendError("Username Not Correct", "fail", 401, next);
       }

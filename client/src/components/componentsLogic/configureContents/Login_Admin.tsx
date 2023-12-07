@@ -39,10 +39,14 @@ const LoginAdmin = () => {
     loginAdmin(loginDatas)
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .then((result:any)=>{
+      console.log(result);
       if(result && result.data && result.data.authenticated === true){
         window.location.reload();    
         return result;
-      }      
+      } 
+      if(result && result.error.data.errors){
+        return showMessage(result.error.data.errors[0].msg, "error");
+      }     
       if(result && result.error && result.error.data.status === "fail"){
         return showMessage(result.error.data.msg, "error");
       }

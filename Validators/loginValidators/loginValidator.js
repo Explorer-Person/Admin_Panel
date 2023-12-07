@@ -2,13 +2,15 @@ const {body, validationResult} = require("express-validator");
 
 const validateLoginInputs = [
     body("username")
-    .isEmpty()
+    .notEmpty()
+    .withMessage("Please enter a valid username...")
     .isString()
     .withMessage("Please enter a valid username...")
     .escape(),
 
     body("password")
-    .isEmpty()
+    .notEmpty()
+    .withMessage("Please enter a valid password...")
     .isString()
     .withMessage("Please enter a valid password...")
     .escape(),
@@ -22,3 +24,5 @@ const validateLoginInputs = [
         next();
       },
 ]
+
+module.exports = validateLoginInputs;
