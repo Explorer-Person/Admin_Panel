@@ -19,6 +19,9 @@ import { takeAllUserData } from "../../../../../redux/slices/UserDataSlices";
 import { useGetAllUserQuery } from "../../../../../redux/apis/getAllUserApi";
 import { manageConfirmBox } from "../../../../../redux/slices/PagesSlices";
 import { Confirm } from "semantic-ui-react";
+import showMessage from "../../../../../messages/showMessage";
+import LoadingPage from "../../../../errors/LoadingPage";
+import ErrorPage from "../../../../errors/ErrorPage";
 
 interface HandleSubmitUserProps {
   handleSubmitUser: () => void;
@@ -29,8 +32,8 @@ const UserSettings = ({ handleSubmitUser }: HandleSubmitUserProps) => {
 
   const {
     data: response,
-    // isLoading: usersLoading,
-    // isError: usersError,
+    isLoading: usersLoading,
+    isError: usersError,
   } = useGetAllUserQuery();
   const users = response?.content;
 
@@ -82,6 +85,9 @@ const UserSettings = ({ handleSubmitUser }: HandleSubmitUserProps) => {
   const increaseContent =  useIncreaseUserInput(handleInputDataChange, userId);
 
   const decreaseUsers = (userId: string) => {
+    if(allUserData.length === 1){
+      return showMessage("The Last User Cannot Deletable!", "error")
+    }
     dispatch(removeUserInput(userId));
     setUserData((prevData) => {
       return prevData.filter((element) => {
@@ -91,6 +97,7 @@ const UserSettings = ({ handleSubmitUser }: HandleSubmitUserProps) => {
   };
 
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const displayUsers = () => {
     if(users && allUserData.length === 0){
       displayInputValue();
@@ -112,21 +119,20 @@ const UserSettings = ({ handleSubmitUser }: HandleSubmitUserProps) => {
     dispatch(manageConfirmBox(id));
   }
   
-  
   useEffect(()=>{
-    if (allUserData.length === 0) {
-     return displayUsers();
-    }
-    if(userData.length !== userContents.length){
-      console.log("equality");
-      return window.location.reload();
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[allUserData, users]);
+      displayUsers();
+  },[userData, displayUsers, users]);
 
   useEffect(() => {
     dispatch(takeAllUserData(userData));
   }, [dispatch, userData]);
+
+  if(usersLoading){
+    <LoadingPage/>
+  }
+  if(usersError){
+    <ErrorPage messageTitle="ERROR!" messageBody="User Cannot Loaded!"/>
+  }
 
   return (
     <div>

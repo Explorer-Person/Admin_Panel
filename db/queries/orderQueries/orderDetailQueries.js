@@ -1,6 +1,6 @@
 const OrderDetail = require("../../../models/orderModels/orderDetail");
 const sequelize = require("../../myDB");
-
+const { QueryTypes } = require("sequelize");
 
 class QueryOrderDetails {
   constructor(orderDetail) {
@@ -8,8 +8,11 @@ class QueryOrderDetails {
   }
 
   addOrder = async () => {
-    const [result] = await sequelize.query(
-      "SELECT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = 'orders');"
+    const result = await sequelize.query("SELECT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name= :tableName);",
+    {
+      replacements: { tableName: 'order_details' },
+      type: QueryTypes.SELECT,
+    }
     );
     const tableExists = result[0].exists;
     if (!tableExists) {

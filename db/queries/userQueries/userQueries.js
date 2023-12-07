@@ -1,6 +1,6 @@
 const User = require("../../../models/userModels/user");
 const sequelize = require("../../myDB");
-
+const { QueryTypes } = require("sequelize");
 
 class UserQueries {
   constructor(users, userIds, cols) {
@@ -12,7 +12,12 @@ class UserQueries {
     if(!this.users) {
        return false;
     }
-    const [result] = await sequelize.query("SELECT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name= 'users')");
+    const result = await sequelize.query("SELECT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name= :tableName);",
+    {
+      replacements: { tableName: 'users' },
+      type: QueryTypes.SELECT,
+    }
+    );
     const isTableExists = result[0].exists;
     if(!isTableExists){
         await User.sync({force: false, alter: true});

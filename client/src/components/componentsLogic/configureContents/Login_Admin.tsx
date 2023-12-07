@@ -39,7 +39,6 @@ const LoginAdmin = () => {
     loginAdmin(loginDatas)
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .then((result:any)=>{
-      console.log(result);
       if(result && result.data && result.data.authenticated === true){
         window.location.reload();    
         return result;

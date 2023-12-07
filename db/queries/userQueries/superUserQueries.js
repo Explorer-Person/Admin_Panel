@@ -1,6 +1,5 @@
 const { QueryTypes } = require("sequelize");
 const sequelize = require("../../myDB");
-
 const SuperUser = require("../../../models/userModels/superUser");
 
 class SuperUserQueries {
@@ -14,7 +13,12 @@ class SuperUserQueries {
     if(!this.users) {
        return false;
     }
-    const [result] = await sequelize.query("SELECT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name= 'super_users')");
+    const result = await sequelize.query("SELECT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name= :tableName);",
+    {
+      replacements: { tableName: 'super_users' },
+      type: QueryTypes.SELECT,
+    }
+    );
     const isTableExists = result[0].exists;
     if(!isTableExists){
         await SuperUser.sync({force: false, alter: true});

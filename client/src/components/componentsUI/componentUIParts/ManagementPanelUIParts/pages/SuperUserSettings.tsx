@@ -18,6 +18,9 @@ import { takeAllSuperUserData } from "../../../../../redux/slices/UserDataSlices
 import { useGetAllSuperUserQuery } from "../../../../../redux/apis/getAllUserApi";
 import { Confirm } from "semantic-ui-react";
 import { manageConfirmBox } from "../../../../../redux/slices/PagesSlices";
+import showMessage from "../../../../../messages/showMessage";
+import ErrorPage from "../../../../errors/ErrorPage";
+import LoadingPage from "../../../../errors/LoadingPage";
 
 interface HandleSubmitSuperUserProps {
   handleSubmitSuperUser: () => void;
@@ -30,7 +33,7 @@ const SuperUserSettings = ({
 
   const userId = uuidv4();
 
-  const {data: response, } = useGetAllSuperUserQuery();
+  const {data: response, isLoading: superUsersLoading, isError: superUsersError} = useGetAllSuperUserQuery();
   const superUsers = response?.content;
 
   const confirmBoxData = useAppSelector(
@@ -75,6 +78,9 @@ const SuperUserSettings = ({
   const increaseContent = useIncreaseUserInput(handleInputDataChange, userId);
 
   const decreaseUsers = (userId: string) => {
+    if(superUserData.length === 1){
+      return showMessage("The Last Super User Cannot Deletable!", "error")
+    }
     dispatch(removeSuperUserInput(userId));
     setUserData((prevData) => {
       return prevData.filter((element) => {
@@ -86,7 +92,7 @@ const SuperUserSettings = ({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const displayUsers = () => {
     displayInputValue();
-    if(superUsers){
+    if(superUsers && superUserData.length === 0){
       return setUserData(superUsers);
     } 
   };
@@ -106,15 +112,19 @@ const SuperUserSettings = ({
 
 
   useEffect(()=>{
-    if (superUserData.length === 0) {
       displayUsers();
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[superUsers])
+  },[displayUsers, superUsers])
 
   useEffect(() => {   
     dispatch(takeAllSuperUserData(userData));
   }, [dispatch, userData]);
+
+  if(superUsersLoading){
+    <LoadingPage/>
+  }
+  if(superUsersError){
+    <ErrorPage messageTitle="ERROR!" messageBody="User Cannot Loaded!"/>
+  }
 
   return (
     <div>
