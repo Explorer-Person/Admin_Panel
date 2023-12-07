@@ -123,13 +123,13 @@ const EditContent = () => {
           result.error.status === "PARSING_ERROR"
         ) {
           showMessage("Order Successfully Saved!", "success");
-          // return window.location.assign("/admin/updateContents");
+          return window.location.assign("/admin/updateContents");
         } else if (result.error && result.error.status === "FETCH_ERROR") {
           showMessage("Server Connection Lost", "error");
-          window.location.assign("/admin/hub");
+          return window.location.assign("/admin/hub");
         } else {
           showMessage("Something Went Wrong", "error");
-          window.location.assign("/admin/hub");
+          return window.location.assign("/admin/hub");
         }
       })
       .catch((err) => {
