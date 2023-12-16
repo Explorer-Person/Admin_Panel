@@ -4,7 +4,6 @@ import UserSettings from "../componentUIParts/ManagementPanelUIParts/pages/UserS
 import SuperUserSettings from "../componentUIParts/ManagementPanelUIParts/pages/SuperUserSettings";
 import { HandleSubmitUserProps } from "../../../interface/Interfaces";
 
-
 const ManagementPanelUI = ({handleSubmitUser, handleSubmitSuperUser}: HandleSubmitUserProps) => {
   const [page, setPage] = useState("");
   const handlePages = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) =>{
@@ -16,7 +15,7 @@ const ManagementPanelUI = ({handleSubmitUser, handleSubmitSuperUser}: HandleSubm
     <div>
       {page === "superUserSetting" ? <SuperUserSettings handleSubmitSuperUser={handleSubmitSuperUser}/> : <UserSettings handleSubmitUser={handleSubmitUser}/>}
       <div className={`${hubCSS.settingBox}`}>
-        <div className="d-flex">
+        <div className={`d-flex`}>
           <div id="userSetting" onClick={handlePages} className={`${hubCSS.settingCol}`}>User Setting</div>
           <div id="superUserSetting" onClick={handlePages} className={`${hubCSS.settingCol}`}>Super User Setting</div>
         </div>

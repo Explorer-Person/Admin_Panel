@@ -37,12 +37,12 @@ const UpdateContentUI = ({ orders, getOrderContent }: updateContentUIProps) => {
   const handleDisplay = (id: string) => {
     dispatch(interactDisplayDetails(id));
   };
-  const activateDisplay = (id: string) =>{
+  const activateDisplay = (id: string) => {
     const correctedData = correctDetailOrder?.find(
       (element) => element.id === id
     );
     return correctedData;
-  }
+  };
 
   const takeKeywords = (event: React.ChangeEvent<HTMLInputElement>) => {
     const keywords = event.target.value;
@@ -68,28 +68,39 @@ const UpdateContentUI = ({ orders, getOrderContent }: updateContentUIProps) => {
 
       {(filteredOrders?.length ?? 0 > 0 ? filteredOrders : orders)?.map(
         (order) => (
-          <Container key={order.root_id} className="mt-5 d-flex">
-            <Container className="my-3 pr-5 text-center border border-muted shadow">
-              <Container className=" p-3 border-dark d-flex">
-            
-                <Toast className="m-3">
-                  <ToastHeader className="h5 w-100">
-                    <p className={`${hubCSS.textCenter}`}>Tracking Code:</p>
-                  </ToastHeader>
-                  <ToastBody className="h6">{order.tracking_code}</ToastBody>
-                </Toast>
-                <Toast className="m-3">
-                  <ToastHeader className="h5 w-100">
-                    <p className={`${hubCSS.textCenter}`}>Email Address:</p>
-                  </ToastHeader>
-                  <ToastBody className="h6">{order.email_address}</ToastBody>
-                </Toast>
-                <Toast className="m-3">
-                  <ToastHeader className="h5 w-100">
-                    <p className={`${hubCSS.textCenter}`}>Status:</p>
-                  </ToastHeader>
-                  <ToastBody className="h6">{order.status}</ToastBody>
-                </Toast>
+          <div key={order.root_id} className={`${hubCSS.pageContainer}`}>
+            <Container className="my-3 px-5 text-center border border-muted shadow">
+              <Container className="my-3 px-5 text-center border border-muted shadow">
+                <div className={`mx-2 ${hubCSS.displayInfoBox}`}>
+                  <div className={`${hubCSS.displayInfoBoxes}`}>
+                    <Toast className="m-3">
+                      <ToastHeader className="h5 w-100">
+                        <p className="text-center">Tracking Code:</p>
+                      </ToastHeader>
+                      <ToastBody className="h6">
+                        {order.tracking_code}
+                      </ToastBody>
+                    </Toast>
+                  </div>
+                  <div className={`${hubCSS.displayInfoBoxes}`}>
+                    <Toast className="m-3">
+                      <ToastHeader className="h5 w-100">
+                        <p className="text-center">Email Address:</p>
+                      </ToastHeader>
+                      <ToastBody className="h6">
+                        {order.email_address}
+                      </ToastBody>
+                    </Toast>
+                  </div>
+                  <div className={`${hubCSS.displayInfoBoxes}`}>
+                    <Toast className="m-3">
+                      <ToastHeader className="h5 w-100">
+                        <p className="text-center">Status:</p>
+                      </ToastHeader>
+                      <ToastBody className="h6">{order.status}</ToastBody>
+                    </Toast>
+                  </div>
+                </div>
               </Container>
 
               <Container
@@ -236,9 +247,7 @@ const UpdateContentUI = ({ orders, getOrderContent }: updateContentUIProps) => {
                 {activateDisplay(order.root_id)?.arrowSide}
               </Badge>
             </Container>
-            <div
-              className="m-3 mt-5 h-25 bg-primary rounded"
-            >
+            <div className="text-center mb-5">
               <Button
                 onClick={() => getOrderContent(order.root_id)}
                 className="bg-primary"
@@ -246,7 +255,7 @@ const UpdateContentUI = ({ orders, getOrderContent }: updateContentUIProps) => {
                 Update
               </Button>
             </div>
-          </Container>
+          </div>
         )
       )}
     </div>

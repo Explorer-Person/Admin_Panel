@@ -210,7 +210,7 @@ export const Page3 = ({ display, handleSubmit }: DisplayP3) => {
   }
 
   return (
-    <Container style={{ width: "800px" }} id="3" className={display.display3}>
+    <Container id="3" className={display.display3}>
       <h1>Shipment Details</h1>
       {contents.map((content) => (
         <Container
@@ -264,7 +264,8 @@ export const Page3 = ({ display, handleSubmit }: DisplayP3) => {
         content="Are You Sure For Update Content"
         onCancel={() => setConfirmBoxData("")}
         onConfirm={confirmProcess}
-        style={{ marginLeft: "25%", marginTop: "15%", height: "20%" }}
+        style={{maxHeight: "20%", textAlign: "center", margin: "20% 35%"}}
+        className="w-25"
       />
     </Container>
   );

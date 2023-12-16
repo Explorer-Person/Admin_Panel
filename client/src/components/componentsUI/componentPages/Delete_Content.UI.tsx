@@ -41,27 +41,27 @@ const DeleteContentsUI = ({
 
   useEffect(() => {
     dispatch(displayDetails(orders));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orders]);
 
   const handleDisplay = (id: string) => {
     dispatch(interactDisplayDetails(id));
   };
-  const activateDisplay = (id: string) =>{
+  const activateDisplay = (id: string) => {
     const correctedData = correctDetailOrder?.find(
       (element) => element.id === id
     );
     return correctedData;
-  }
+  };
 
   const takeKeywords = (event: React.ChangeEvent<HTMLInputElement>) => {
     const keywords = event.target.value;
     dispatch(filterOrderData(keywords));
   };
 
-  const setConfirmBoxData = (id: string) =>{
+  const setConfirmBoxData = (id: string) => {
     dispatch(manageConfirmBox(id));
-  }
+  };
 
   const deleteContent = (id: string) => {
     deleteOrderContent(id);
@@ -87,27 +87,39 @@ const DeleteContentsUI = ({
 
       {(filteredOrders?.length ?? 0 > 0 ? filteredOrders : orders)?.map(
         (order) => (
-          <Container key={order.root_id} className="mt-5 d-flex">
-            <Container className="my-3 pr-5 text-center border border-muted shadow">
-              <Container className=" p-3 border-dark d-flex">
-                <Toast className="m-3">
-                  <ToastHeader className="h5 w-100">
-                    <p className={`${hubCSS.textCenter}`}>Tracking Code:</p>
-                  </ToastHeader>
-                  <ToastBody className="h6">{order.tracking_code}</ToastBody>
-                </Toast>
-                <Toast className="m-3">
-                  <ToastHeader className="h5 w-100">
-                    <p className={`${hubCSS.textCenter}`}>Email Address:</p>
-                  </ToastHeader>
-                  <ToastBody className="h6">{order.email_address}</ToastBody>
-                </Toast>
-                <Toast className="m-3">
-                  <ToastHeader className="h5 w-100">
-                    <p className={`${hubCSS.textCenter}`}>Status:</p>
-                  </ToastHeader>
-                  <ToastBody className="h6">{order.status}</ToastBody>
-                </Toast>
+          <div key={order.root_id} className={`${hubCSS.pageContainer}`}>
+            <Container className="my-3 px-5 text-center border border-muted shadow">
+              <Container className="my-3 px-5 text-center border border-muted shadow">
+                <div className={`mx-2 ${hubCSS.displayInfoBox}`}>
+                  <div className={`${hubCSS.displayInfoBoxes}`}>
+                    <Toast className="m-3">
+                      <ToastHeader className="h5 w-100">
+                        <p className="text-center">Tracking Code:</p>
+                      </ToastHeader>
+                      <ToastBody className="h6">
+                        {order.tracking_code}
+                      </ToastBody>
+                    </Toast>
+                  </div>
+                  <div className={`${hubCSS.displayInfoBoxes}`}>
+                    <Toast className="m-3">
+                      <ToastHeader className="h5 w-100">
+                        <p className="text-center">Email Address:</p>
+                      </ToastHeader>
+                      <ToastBody className="h6">
+                        {order.email_address}
+                      </ToastBody>
+                    </Toast>
+                  </div>
+                  <div className={`${hubCSS.displayInfoBoxes}`}>
+                    <Toast className="m-3">
+                      <ToastHeader className="h5 w-100">
+                        <p className="text-center">Status:</p>
+                      </ToastHeader>
+                      <ToastBody className="h6">{order.status}</ToastBody>
+                    </Toast>
+                  </div>
+                </div>
               </Container>
 
               <Container
@@ -254,20 +266,27 @@ const DeleteContentsUI = ({
                 {activateDisplay(order.root_id)?.arrowSide}
               </Badge>
             </Container>
-            <Button
-              onClick={() => setConfirmBoxData(order.root_id)}
-              className="m-3 mt-5 h-25 bg-danger"
-            >
-              x
-            </Button>
+            <div className="mb-5 text-center">
+              <Button
+                onClick={() => setConfirmBoxData(order.root_id)}
+                className={"h-25 bg-danger"}
+              >
+                x
+              </Button>
+            </div>
             <Confirm
               open={confirmBoxData.status}
               content={`Are You Sure For Delete Content ?`}
               onCancel={() => setConfirmBoxData("")}
               onConfirm={() => deleteContent(confirmBoxData.id)}
-              style={{ marginLeft: "25%", marginTop: "15%", height: "20%" }}
+              style={{
+                maxHeight: "20%",
+                textAlign: "center",
+                margin: "20% 35%",
+              }}
+              className="w-25"
             />
-          </Container>
+          </div>
         )
       )}
     </div>

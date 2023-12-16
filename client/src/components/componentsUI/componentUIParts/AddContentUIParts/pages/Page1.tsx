@@ -7,6 +7,7 @@ import { initialOrder } from "../../../../../redux/stores/initialState";
 import { useAppDispatch } from "../../../../../redux/stores/hooks";
 import { addOrderData } from "../../../../../redux/slices/OrderDataSlices";
 import { Button } from "reactstrap";
+import hubCSS from "/public/css/hub.module.css"
 
 export const Page1 = ({ display }: DisplayP) => {
   const dispatch = useAppDispatch();
@@ -45,12 +46,11 @@ export const Page1 = ({ display }: DisplayP) => {
 
   return (
     <Container
-      style={{ width: "800px" }}
       className={`fade-in ${display.display1}`}
       id="1"
     >
       <h1>Order Details</h1>
-      <Container className="d-flex">
+      <Container className={`${hubCSS.pageContainer}`}>
         <Container>
           <FloatingLabel
             controlId="amazonOrderId"
@@ -168,7 +168,7 @@ export const Page1 = ({ display }: DisplayP) => {
         </Container>
       </Container>
       <h1>Customer Details</h1>
-      <Container className="d-flex mt-1 justify-content-center">
+      <Container className={`${hubCSS.pageContainer}`}>
         <FloatingLabel
           controlId={`emailAddress`}
           label="Email address"

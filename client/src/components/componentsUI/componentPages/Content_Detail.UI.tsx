@@ -1,5 +1,6 @@
 import { Container, Row, Col, Table } from "reactstrap";
 import { ContentDetailData } from "../../../interface/OrderData";
+import hubCSS from "/public/css/hub.module.css";
 
 interface Data {
   contentDetailData: ContentDetailData;
@@ -144,12 +145,11 @@ const ContentDetailUI = ({ contentDetailData }: Data) => {
             <Row>
               <Container className="my-2">
                 <Container className="border border-muted shadow d-flex justify-content-center">
-                  <Table>
+                  <Table className="w-75">
                     <thead>
                       <tr>
                         <th>Product ID</th>
-                        <th>Email</th>
-                        <th>Title</th>
+                        <th>Product Title</th>
                         <th>Count</th>
                       </tr>
                     </thead>
@@ -157,7 +157,6 @@ const ContentDetailUI = ({ contentDetailData }: Data) => {
                       {contentDetailData.orderDetails.map((product) => (
                         <tr key={product.id}>
                           <th scope="row">{product.element.productId}</th>
-                          <td>{product.element.emailAddress}</td>
                           <td>{product.element.productTitle}</td>
                           <td>{product.element.count}</td>
                         </tr>
@@ -183,7 +182,7 @@ const ContentDetailUI = ({ contentDetailData }: Data) => {
 
               <Row>
                 <Row>
-                  <Container className="d-flex">
+                  <Container className={`${hubCSS.pageContainer}`}>
                     <Container className="m-3 border border-muted shadow">
                       <Row className="m-3">
                         <Container className="d-flex">

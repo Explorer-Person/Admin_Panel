@@ -1,4 +1,4 @@
-import { Container, Row, Col, Button } from "reactstrap";
+import { Container, Row, Button } from "reactstrap";
 import {
   useAppDispatch,
   useAppSelector,
@@ -22,6 +22,7 @@ import { Confirm } from "semantic-ui-react";
 import showMessage from "../../../../../messages/showMessage";
 import LoadingPage from "../../../../errors/LoadingPage";
 import ErrorPage from "../../../../errors/ErrorPage";
+import hubCSS from "/public/css/hub.module.css";
 
 interface HandleSubmitUserProps {
   handleSubmitUser: () => void;
@@ -37,7 +38,6 @@ const UserSettings = ({ handleSubmitUser }: HandleSubmitUserProps) => {
   } = useGetAllUserQuery();
   const users = response?.content;
 
-
   const allUserData = useAppSelector(
     (state: RootState) => state.UserDataReducer.AllUserData
   );
@@ -45,7 +45,6 @@ const UserSettings = ({ handleSubmitUser }: HandleSubmitUserProps) => {
   const userContents = useAppSelector(
     (state: RootState) => state.InputReducer.UserContents
   );
-
 
   const userId = uuidv4();
 
@@ -56,7 +55,7 @@ const UserSettings = ({ handleSubmitUser }: HandleSubmitUserProps) => {
     password: "",
     email: "",
   };
- 
+
   const confirmBoxData = useAppSelector(
     (state: RootState) => state.PagesReducer.confirmBoxData
   );
@@ -80,13 +79,13 @@ const UserSettings = ({ handleSubmitUser }: HandleSubmitUserProps) => {
       });
     });
   };
-  const displayInputValue =  useDisplayUserInput(handleInputDataChange, users);
-  const setInputValue =  useSetInputValue(handleInputDataChange);
-  const increaseContent =  useIncreaseUserInput(handleInputDataChange, userId);
+  const displayInputValue = useDisplayUserInput(handleInputDataChange, users);
+  const setInputValue = useSetInputValue(handleInputDataChange);
+  const increaseContent = useIncreaseUserInput(handleInputDataChange, userId);
 
   const decreaseUsers = (userId: string) => {
-    if(allUserData.length === 1){
-      return showMessage("The Last User Cannot Deletable!", "error")
+    if (allUserData.length === 1) {
+      return showMessage("The Last User Cannot Deletable!", "error");
     }
     dispatch(removeUserInput(userId));
     setUserData((prevData) => {
@@ -96,15 +95,13 @@ const UserSettings = ({ handleSubmitUser }: HandleSubmitUserProps) => {
     });
   };
 
-
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const displayUsers = () => {
-    if(users && allUserData.length === 0){
+    if (users && allUserData.length === 0) {
       displayInputValue();
       return setUserData(users);
     }
   };
- 
 
   const increaseUsers = () => {
     increaseContent();
@@ -115,23 +112,29 @@ const UserSettings = ({ handleSubmitUser }: HandleSubmitUserProps) => {
     setInputValue(userId);
   };
 
-  const setConfirmBoxData = (id: string) =>{
+  const setConfirmBoxData = (id: string) => {
     dispatch(manageConfirmBox(id));
-  }
-  
+  };
+
+  useEffect(() => { 
+     displayUsers();
+  }, [dispatch, userData, displayUsers, users]);
+
   useEffect(()=>{
-      displayUsers();
-  },[userData, displayUsers, users]);
+    if(users && users?.length !== userContents.length){
+     console.log("reload")
+    }
+  })
 
   useEffect(() => {
     dispatch(takeAllUserData(userData));
   }, [dispatch, userData]);
 
-  if(usersLoading){
-    <LoadingPage/>
+  if (usersLoading) {
+    <LoadingPage />;
   }
-  if(usersError){
-    <ErrorPage messageTitle="ERROR!" messageBody="User Cannot Loaded!"/>
+  if (usersError) {
+    <ErrorPage messageTitle="ERROR!" messageBody="User Cannot Loaded!" />;
   }
 
   return (
@@ -143,28 +146,25 @@ const UserSettings = ({ handleSubmitUser }: HandleSubmitUserProps) => {
               USER SETTINGS
             </h1>
           </Row>
-          {
-            userContents.map((userContent) => (
-              <Row key={userContent.id}>
-                <Col xs="11">{userContent.element}</Col>
-                <Col xs="1" className="d-flex my-4">
-                  <Button
-                    onClick={() => handleEditButton(userContent.id)}
-                    className="bg-warning"
-                  >
-                    <h2>✎</h2>
-                  </Button>{" "}
-                  <Button
-                    onClick={() => decreaseUsers(userContent.id)}
-                    className="bg-danger mx-2"
-                  >
-                    <h2 className="px-2">x</h2>
-                  </Button>
-                </Col>
-              </Row>
-            ))
-          }
-
+          {userContents.map((userContent) => (
+            <div className={`${hubCSS.userPageContainer}`} key={userContent.id}>
+              <Container style={{width: "90%"}}>{userContent.element}</Container>
+              <Container style={{width: "10%"}} className="d-flex justify-content-center">
+                <Button
+                  onClick={() => handleEditButton(userContent.id)}
+                  className="bg-warning"
+                >
+                  <h2>✎</h2>
+                </Button>{" "}
+                <Button
+                  onClick={() => decreaseUsers(userContent.id)}
+                  className="bg-danger mx-2"
+                >
+                  <h2 className="px-2">x</h2>
+                </Button>
+              </Container>
+            </div>
+          ))}
           <Row className="justify-content-center">
             <Button
               style={{ width: "10%" }}
@@ -177,7 +177,7 @@ const UserSettings = ({ handleSubmitUser }: HandleSubmitUserProps) => {
           <div className="text-center">
             <Button
               onClick={() => setConfirmBoxData("datas")}
-              style={{marginBottom: "8%"}}
+              style={{ marginBottom: "25%" }}
               className="mt-4 bg-dark w-50"
             >
               <h1>Save Changes</h1>
@@ -187,7 +187,12 @@ const UserSettings = ({ handleSubmitUser }: HandleSubmitUserProps) => {
               content={`Do you sure for saving changes ?`}
               onCancel={() => setConfirmBoxData("")}
               onConfirm={handleSubmitUser}
-              style={{ marginLeft: "25%", marginTop: "15%", height: "20%" }}
+              style={{
+                maxHeight: "20%",
+                textAlign: "center",
+                margin: "20% 35%",
+              }}
+              className="w-25"
             />
           </div>
         </Container>

@@ -6,7 +6,7 @@ import {
 } from "../../../../../redux/slices/InputSlices";
 import { OrderContentsInputP } from "../../../../../interface/Interfaces";
 import { FormattedOrder } from "../../../../../interface/OrderData";
-// import { RootState } from "../../../../../redux/stores/store";
+import hubCSS from "/public/css/hub.module.css"
 
 
 type MyChangeEvent = React.ChangeEvent<unknown>;
@@ -22,7 +22,7 @@ const generateNewContent = (
        const orderDetail = {
         contentId: orderData.id,
         element: (
-          <Container className="d-flex justify-content-center" key={contentId}>
+          <Container className={`${hubCSS.pageContainer}`} key={contentId}>
         <FloatingLabel
          controlId={`productId-${orderData.id}`}
           label="Product ID"
@@ -71,7 +71,7 @@ const generateNewContent = (
   );
 
   const element = (
-    <Container className="d-flex justify-content-center" key={contentId}>
+    <Container className={`${hubCSS.pageContainer}`} key={contentId}>
       <FloatingLabel
         controlId={`emailAddress-${contentId}`}
         label="Email address"

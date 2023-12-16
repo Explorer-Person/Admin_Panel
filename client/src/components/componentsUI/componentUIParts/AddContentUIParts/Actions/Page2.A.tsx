@@ -2,12 +2,13 @@ import { FloatingLabel, Form, Container } from "react-bootstrap";
 import { useAppDispatch } from "../../../../../redux/stores/hooks";
 import { addOrderDetailInput, removeOrderDetailInput } from "../../../../../redux/slices/InputSlices";
 import { OrderContentsInputP } from "../../../../../interface/Interfaces";
+import hubCSS from "/public/css/hub.module.css"
 
 type MyChangeEvent = React.ChangeEvent<unknown>;
 
 const generateNewContent = (handleInputChange: (event: MyChangeEvent, contentId: string) => void, contentId: string) => {
     const element = (
-      <Container className="d-flex justify-content-center" key={contentId}>
+      <Container  className={`${hubCSS.pageContainer}`} key={contentId}>
         <FloatingLabel
           controlId={`productId-${contentId}`}
           label="Product ID"

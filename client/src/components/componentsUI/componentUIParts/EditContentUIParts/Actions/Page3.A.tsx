@@ -19,7 +19,7 @@ import {
 } from "../../../../../redux/slices/OrderDataSlices";
 import { FormattedOrder } from "../../../../../interface/OrderData";
 import { RootState } from "../../../../../redux/stores/store";
-
+import hubCSS from "/public/css/hub.module.css"
 
 type MyChangeEvent = React.ChangeEvent<unknown>;
 interface Dispatch {
@@ -36,7 +36,7 @@ export const generateNewContent = (
       return {
         id: orderData.id,
         element: (
-        <Container key={orderData.id} className="d-flex">
+        <Container key={orderData.id} className={`${hubCSS.pageContainer}`}>
           <Container>
             <FloatingLabel
               controlId={`carrierTrackingCode-${orderData.id}`}
@@ -189,7 +189,7 @@ export const generateNewContent = (
     }
   );
   const shipmentElementDetails = (
-    <Container key={detailId} className="d-flex">
+    <Container key={detailId} className={`${hubCSS.pageContainer}`}>
       <Container>
         <FloatingLabel
           controlId={`carrierTrackingCode-${detailId}`}
@@ -344,7 +344,7 @@ const generateNewEvent = (
       id: orderData.id,
       detailId: orderData.detailId,
       element: (
-        <Container key={orderData.id} className="d-flex justify-content-center">
+        <Container key={orderData.id} className={`${hubCSS.pageContainer}`}>
           <FloatingLabel
             controlId={`eventDate-${orderData.id}`}
             label="Date"
@@ -402,7 +402,7 @@ const generateNewEvent = (
     }
   });
   const shipmentEventElement = (
-    <Container key={eventsId} className="d-flex justify-content-center">
+    <Container key={eventsId} className={`${hubCSS.pageContainer}`}>
       <FloatingLabel
         controlId={`eventDate-${eventsId}`}
         label="Date"

@@ -15,7 +15,7 @@ const NavbarUI = ({isAuthUser}: NavbarUIProps) =>{
      dispatch(toggleSideBar("0"))
   }
     return(
-        <Navbar className="my-0 d-flex" color="dark" dark>
+        <Navbar className="m-0 d-flex" color="dark" dark>
         <NavbarBrand className="d-flex align-items-center" href="/admin/hub">
           <img color="white" src="/logos/icon-navbar.png"></img>
           <h2>ADMIN PANEL</h2>

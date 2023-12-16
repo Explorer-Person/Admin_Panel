@@ -155,7 +155,7 @@ export const Page3 = ({ display, handleSubmit }: DisplayP3) => {
   }, [shipmentDetails, shipmentEvents]);
 
   return (
-    <Container style={{width: "800px"}} id="3" className={display.display3}>
+    <Container id="3" className={display.display3}>
       <h1>Shipment Details</h1>
       {contents.map((content) => (
         <Container

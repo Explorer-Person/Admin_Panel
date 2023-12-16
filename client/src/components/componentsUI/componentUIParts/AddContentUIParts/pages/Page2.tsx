@@ -13,6 +13,7 @@ import { useDecreaseInput, useIncreaseInput } from "../Actions/Page2.A";
 import { OrderDetail } from "../../../../../redux/stores/initialState";
 import { addOrderDetailData } from "../../../../../redux/slices/OrderDataSlices";
 
+
 export const Page2 = ({ display }: DisplayP) => {
   const dispatch = useAppDispatch();
   const contents = useAppSelector(
@@ -67,10 +68,10 @@ export const Page2 = ({ display }: DisplayP) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[handleInputChange])
   return (
-    <Container style={{width: "800px"}} id="2" className={display.display2}>
+    <Container id="2" className={display.display2}>
       <h1>Content Details</h1>
       {contents.map((content: OrderContentsInputP) => (
-        <Container key={content.id} className="d-flex">
+        <div key={content.id}>
           <Container key={content.id}>
             <Container key={content.id}>{content.element}</Container>
           </Container>
@@ -81,7 +82,7 @@ export const Page2 = ({ display }: DisplayP) => {
           >
             -
           </Button>
-        </Container>
+        </div>
       ))}
       <Button onClick={increaseInputArray} className=" mt-4 mx-2">
         Add Product Info

@@ -13,6 +13,7 @@ import SideBarUI from "../componentsUI/componentUIParts/NavbarUIParts/SideBar.UI
 import { useGetCsrfTokenQuery } from "../../redux/apis/getCsrfToken";
 import { useLogoutAdminPanelMutation } from "../../redux/apis/authAdminApi";
 import { RootState } from "../../redux/stores/store";
+import { Container } from "reactstrap";
 
 
 
@@ -21,7 +22,7 @@ function AppLogic() {
   const authInfo = useAppSelector((state:RootState)=> state.AuthInfoReducer.userAuthInfo)
 
   const toggleSideMenu = () => {
-    dispatch(toggleSideBar("-20%"));
+    dispatch(toggleSideBar("-25%"));
   };
 
   const { data: csrfToken } = useGetCsrfTokenQuery();
@@ -47,7 +48,7 @@ function AppLogic() {
         {!authInfo.isAuthUser ? undefined : <SideBarUI handleLogout={handleLogout}/>}
       </nav>
 
-      <div onClick={toggleSideMenu}>
+      <Container onClick={toggleSideMenu}>
         <ErrorBoundary
           FallbackComponent={FallBackErrorPage}
           onError={onErrorLogic}
@@ -65,7 +66,7 @@ function AppLogic() {
             />
           </Routes>
         </ErrorBoundary>
-      </div>
+      </Container>
     </div>
   );
 }

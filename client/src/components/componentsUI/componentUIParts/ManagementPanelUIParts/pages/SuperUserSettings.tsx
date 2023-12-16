@@ -1,4 +1,4 @@
-import { Container, Row, Col, Button } from "reactstrap";
+import { Row, Button, Container } from "reactstrap";
 import {
   useAppDispatch,
   useAppSelector,
@@ -21,6 +21,7 @@ import { manageConfirmBox } from "../../../../../redux/slices/PagesSlices";
 import showMessage from "../../../../../messages/showMessage";
 import ErrorPage from "../../../../errors/ErrorPage";
 import LoadingPage from "../../../../errors/LoadingPage";
+import hubCSS from "/public/css/hub.module.css"
 
 interface HandleSubmitSuperUserProps {
   handleSubmitSuperUser: () => void;
@@ -129,16 +130,16 @@ const SuperUserSettings = ({
   return (
     <div>
       <div>
-        <Container>
+        <div>
           <Row>
             <h1 style={{ color: "#212529" }} className="text-center my-3">
               SUPER USER SETTINGS
             </h1>
           </Row>
           {superUserContents.map((userContent) => (
-            <Row key={userContent.id}>
-              <Col xs="11">{userContent.element}</Col>
-              <Col xs="1" className="d-flex my-4">
+            <div className={`${hubCSS.userPageContainer}`} key={userContent.id}>
+              <Container style={{width: "90%"}}>{userContent.element}</Container>
+              <Container style={{width: "10%"}} className="d-flex justify-content-center">
                 <Button
                   onClick={() => handleEditButton(userContent.id)}
                   className="bg-warning"
@@ -151,8 +152,8 @@ const SuperUserSettings = ({
                 >
                   <h2 className="px-2">x</h2>
                 </Button>
-              </Col>
-            </Row>
+              </Container>
+            </div>
           ))}
 
           <Row className="justify-content-center">
@@ -167,7 +168,7 @@ const SuperUserSettings = ({
           <div className="text-center">
             <Button
               onClick={() => setConfirmBoxData("datas")}
-              style={{marginBottom: "8%"}}
+              style={{ marginBottom: "25%" }}
               className="mt-4 bg-dark w-50"
             >
               <h1>Save Changes</h1>
@@ -177,10 +178,11 @@ const SuperUserSettings = ({
               content={`Do you sure for saving changes ?`}
               onCancel={() => setConfirmBoxData("")}
               onConfirm={handleSubmitSuperUser}
-              style={{ marginLeft: "25%", marginTop: "15%", height: "20%" }}
+              style={{maxHeight: "20%", textAlign: "center", margin: "20% 35%"}}
+              className="w-25"
             />
           </div>
-        </Container>
+        </div>
       </div>
     </div>
   );

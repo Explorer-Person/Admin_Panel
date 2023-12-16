@@ -18,12 +18,12 @@ const HUB_UI = ({rootAccess}: HubUIProps) => {
     <div onClick={toggleSideMenu}>
       <Container className={hubCss.mainBox}>
         <div className={hubCss.flexBox}>
-          <div className={`${hubCss.linkBoxes} text-end`}>
+          <div className={`${hubCss.linkBoxes} text-center`}>
             <Link to="/admin/seeContents">
               <ConfigureBoxWithHover index={1} text="See Contents" />
             </Link>
           </div>
-          <div className={`${hubCss.linkBoxes}`}>
+          <div className={`${hubCss.linkBoxes} text-center`}>
             <Link to="/admin/addContent">
               <ConfigureBoxWithHover index={2} text="Add Content" />
             </Link>
@@ -32,20 +32,20 @@ const HUB_UI = ({rootAccess}: HubUIProps) => {
         {
          !rootAccess ? null : <div>
           <div>
-            <Link className={`${hubCss.linkBoxes}`} to="/admin/management">
-              <Container className={`w-75 h2 text-light ${hubCss.box5}`}>Manage Admin Users</Container>
+            <Link className={`${hubCss.linkBoxes} text-center`} to="/admin/management">
+              <Container className={`h2 text-light ${hubCss.box5}`}>Manage Admin Users</Container>
             </Link>
           </div>
         </div>
         }
         
-        <div className="d-flex">
-          <div className={`${hubCss.linkBoxes} text-end`}>
+        <div className={hubCss.flexBox}>
+          <div className={`${hubCss.linkBoxes} text-center`}>
             <Link to="/admin/updateContents">
               <ConfigureBoxWithHover index={3} text="Update Contents" />
             </Link>
           </div>
-          <div className={`${hubCss.linkBoxes}`}>
+          <div className={`${hubCss.linkBoxes} text-center align-items-center`}>
             <Link to="/admin/deleteContents">
               <ConfigureBoxWithHover index={4} text="Delete Contents" />
             </Link>

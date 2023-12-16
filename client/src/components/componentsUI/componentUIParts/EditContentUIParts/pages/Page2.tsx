@@ -106,7 +106,7 @@ export const Page2 = ({ display }: DisplayP) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [handleInputChange]);
   return (
-    <Container style={{width: "800px"}} id="2" className={display.display2}>
+    <Container id="2" className={display.display2}>
       <h1>Content Details</h1>
       {existsContents.map((content: OrderContentsInputP) => (
         <Container key={content.id} className="d-flex">

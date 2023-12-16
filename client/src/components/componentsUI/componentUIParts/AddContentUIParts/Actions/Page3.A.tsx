@@ -13,6 +13,7 @@ import { useAppDispatch, useAppSelector } from "../../../../../redux/stores/hook
 import { v4 as uuidv4 } from "uuid";
 import { RootState } from "../../../../../redux/stores/store";
 import { generatedDetailId, generatedEventId } from "../../../../../redux/slices/OrderDataSlices";
+import hubCSS from "/public/css/hub.module.css"
 
 type MyChangeEvent = React.ChangeEvent<unknown>;
 interface Dispatch {
@@ -24,7 +25,7 @@ export const generateNewContent = (
   detailId: string
 ) => {
   const shipmentElementDetails = (
-    <Container key={detailId} className="d-flex">
+    <Container key={detailId} className={`${hubCSS.pageContainer}`}>
       <Container>
         <FloatingLabel
           controlId={`carrierTrackingCode-${detailId}`}
@@ -165,7 +166,7 @@ const generateNewEvent = (
 ) => {
   dispatch(generatedEventId());
   const shipmentElementEvents = (
-    <Container key={eventsId} className="d-flex justify-content-center">
+    <Container key={eventsId} className={`${hubCSS.pageContainer}`}>
       
       <FloatingLabel
         controlId={`eventDate-${eventsId}`}

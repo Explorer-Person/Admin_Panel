@@ -8,7 +8,7 @@ const initialState: initialPagesStateP = {
     id: "",
     status: false,
   },
-  sideBarLeft: "-15%", 
+  sideBarLeft: "-25%", 
 };
 
 export const PagesSlices = createSlice({
@@ -44,7 +44,7 @@ export const PagesSlices = createSlice({
     },
     toggleSideBar: (state, action: PayloadAction<string>) =>{
        if(state.sideBarLeft === "0"){
-           state.sideBarLeft = "-15%";
+           state.sideBarLeft = "-25%";
        }else{
            state.sideBarLeft = action.payload
        }
