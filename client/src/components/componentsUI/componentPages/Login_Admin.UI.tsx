@@ -11,13 +11,13 @@ const LoginAdminUI = ({handleLoginInputs, handleSubmitLogin}: AdminLoginPageProp
         <Container className="my-1">
           <FormGroup className="text-center">
             <Label for="username">USER NAME</Label>
-            <Input name="username" onChange={handleLoginInputs}/>
+            <Input name="username" type="text" onChange={handleLoginInputs}/>
           </FormGroup>
         </Container>
         <Container className="mt-5">
           <FormGroup className="text-center">
             <Label for="password">PASSWORD</Label>
-            <Input name="password" onChange={handleLoginInputs}/>
+            <Input name="password" type="password" onChange={handleLoginInputs}/>
           </FormGroup>
         </Container>
         <Container>
