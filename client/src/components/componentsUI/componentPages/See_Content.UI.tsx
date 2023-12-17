@@ -7,7 +7,6 @@ import {
   Toast,
   ToastBody,
   ToastHeader,
-  Button,
   Col,
   Row,
   Table,
@@ -51,29 +50,26 @@ const SeeContentsUI = ({ orders, getOrderContent }: updateContentUIProps) => {
 
   return (
     <div>
-      <Container className="input-group mt-5">
+      <div className="input-group mt-5">
         <input
           type="search"
-          className="form-control rounded border border-dark"
+          className="form-control rounded border border-primary mb-5"
           placeholder="Search"
           aria-label="Search"
           aria-describedby="search-addon"
           name="keywords"
           onChange={(e) => takeKeywords(e)}
         />
-        <button type="button" className="btn btn-outline-dark">
-          search
-        </button>
-      </Container>
+      </div>
 
       {(filteredOrders?.length ?? 0 > 0 ? filteredOrders : orders)?.map(
         (order) => (
           <div key={order.root_id} className={`${hubCSS.pageContainer}`}>
-            <Container className="my-3 px-5 text-center border border-muted shadow">
-              <Container className="my-3 px-5 text-center border border-muted shadow">
+            <Container className="bg-light my-3 px-5 text-center border border-muted shadow rounded">
+              <Container className="bg-primary rounded my-3 px-5 text-center border border-muted shadow">
                 <div className={`mx-2 ${hubCSS.displayInfoBox}`}>
                   <div className={`${hubCSS.displayInfoBoxes}`}>
-                    <Toast className="m-3">
+                    <Toast className="m-2">
                       <ToastHeader className="h5 w-100">
                         <p className="text-center">Tracking Code:</p>
                       </ToastHeader>
@@ -83,7 +79,7 @@ const SeeContentsUI = ({ orders, getOrderContent }: updateContentUIProps) => {
                     </Toast>
                   </div>
                   <div className={`${hubCSS.displayInfoBoxes}`}>
-                    <Toast className="m-3">
+                    <Toast className="m-2">
                       <ToastHeader className="h5 w-100">
                         <p className="text-center">Email Address:</p>
                       </ToastHeader>
@@ -93,7 +89,7 @@ const SeeContentsUI = ({ orders, getOrderContent }: updateContentUIProps) => {
                     </Toast>
                   </div>
                   <div className={`${hubCSS.displayInfoBoxes}`}>
-                    <Toast className="m-3">
+                    <Toast className="m-2">
                       <ToastHeader className="h5 w-100">
                         <p className="text-center">Status:</p>
                       </ToastHeader>
@@ -110,7 +106,7 @@ const SeeContentsUI = ({ orders, getOrderContent }: updateContentUIProps) => {
               >
                 {order.shipment_details &&
                   order.shipment_details.map((shipment) => (
-                    <Toast key={shipment.detail_id} className="m-3 w-100">
+                    <Toast key={shipment.detail_id} className="m-3 w-100 bg-primary">
                       <ToastHeader className="text-center h5">
                         Shipment Details - {shipment.detail_id}
                       </ToastHeader>
@@ -206,12 +202,12 @@ const SeeContentsUI = ({ orders, getOrderContent }: updateContentUIProps) => {
                             </Row>
                           </Row>
                           <Row>
-                            <Toast className="m-3 w-100">
+                            <Toast className="m-3 w-100 rounded">
                               <ToastHeader className="text-center h5">
                                 Shipment Events
                               </ToastHeader>
                               <ToastBody className="w-100">
-                                <Table className="w-100">
+                                <Table className="w-100 bg-primary">
                                   <thead>
                                     <tr>
                                       <th>Date</th>
@@ -243,17 +239,18 @@ const SeeContentsUI = ({ orders, getOrderContent }: updateContentUIProps) => {
                 id={order.root_id}
                 onClick={(e) => handleDisplay(e.currentTarget.id)}
                 className={`${hubCSS.pointer}`}
+                color="primary"
               >
                 {activateDisplay(order.root_id)?.arrowSide}
               </Badge>
             </Container>
             <div className="mb-5 h-25 text-center">
-              <Button
+              <button
                 onClick={() => getOrderContent(order.root_id)}
-                className="bg-primary"
+                className={`bg-primary text-light border border-light rounded py-2 px-3 mx-2 ${hubCSS.button}`}
               >
                 Detail
-              </Button>
+              </button>
             </div>
           </div>
         )

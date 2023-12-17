@@ -15,14 +15,14 @@ const NavbarUI = ({isAuthUser}: NavbarUIProps) =>{
      dispatch(toggleSideBar("0"))
   }
     return(
-        <Navbar className="m-0 d-flex" color="dark" dark>
+        <Navbar style={{zIndex: "10"}} className="w-100 d-flex" color="dark" dark>
         <NavbarBrand className="d-flex align-items-center" href="/admin/hub">
           <img color="white" src="/logos/icon-navbar.png"></img>
           <h2>ADMIN PANEL</h2>
         </NavbarBrand>
         <NavItem className="d-flex">
           {
-               !isAuthUser ? <h3 className='mt-4'><NavbarBrand href='/login' className='text-light'>Login</NavbarBrand></h3> : <FontAwesomeIcon onClick={toggleSideMenu}  className={`text-light h1 m-2 mt-5 ${hubCSS.pointer}`} icon={faBars} />
+               !isAuthUser ? <h3 className='mt-4'><NavbarBrand href='/login' className='text-light'>Login</NavbarBrand></h3> : <FontAwesomeIcon onClick={toggleSideMenu} style={{position: "absolute", right: "5%", top: "70%", zIndex: "3"}} className={`text-light h1 ${hubCSS.pointer}`} icon={faBars} />
           }
          
   

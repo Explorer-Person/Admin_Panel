@@ -5,7 +5,6 @@ import {
   Toast,
   ToastBody,
   ToastHeader,
-  Button,
   Col,
   Row,
   Table,
@@ -70,29 +69,26 @@ const DeleteContentsUI = ({
 
   return (
     <div>
-      <Container className="input-group mt-5">
+      <div style={{marginRight: "15%"}} className="input-group mt-5">
         <input
           type="search"
-          className="form-control rounded border border-dark"
+          className="form-control rounded border border-danger mb-5"
           placeholder="Search"
           aria-label="Search"
           aria-describedby="search-addon"
           name="keywords"
           onChange={(e) => takeKeywords(e)}
         />
-        <button type="button" className="btn btn-outline-dark">
-          search
-        </button>
-      </Container>
+      </div>
 
       {(filteredOrders?.length ?? 0 > 0 ? filteredOrders : orders)?.map(
         (order) => (
           <div key={order.root_id} className={`${hubCSS.pageContainer}`}>
-            <Container className="my-3 px-5 text-center border border-muted shadow">
-              <Container className="my-3 px-5 text-center border border-muted shadow">
-                <div className={`mx-2 ${hubCSS.displayInfoBox}`}>
+            <Container className="my-3 px-5 text-center border border-muted shadow rounded">
+            <Container className="bg-danger my-3 text-center border border-muted shadow rounded">
+                <div className={`mx-4 ${hubCSS.displayInfoBox}`}>
                   <div className={`${hubCSS.displayInfoBoxes}`}>
-                    <Toast className="m-3">
+                    <Toast className="m-2">
                       <ToastHeader className="h5 w-100">
                         <p className="text-center">Tracking Code:</p>
                       </ToastHeader>
@@ -102,7 +98,7 @@ const DeleteContentsUI = ({
                     </Toast>
                   </div>
                   <div className={`${hubCSS.displayInfoBoxes}`}>
-                    <Toast className="m-3">
+                    <Toast className="m-2">
                       <ToastHeader className="h5 w-100">
                         <p className="text-center">Email Address:</p>
                       </ToastHeader>
@@ -112,7 +108,7 @@ const DeleteContentsUI = ({
                     </Toast>
                   </div>
                   <div className={`${hubCSS.displayInfoBoxes}`}>
-                    <Toast className="m-3">
+                    <Toast className="m-2">
                       <ToastHeader className="h5 w-100">
                         <p className="text-center">Status:</p>
                       </ToastHeader>
@@ -129,14 +125,17 @@ const DeleteContentsUI = ({
               >
                 {order.shipment_details &&
                   order.shipment_details.map((shipment) => (
-                    <Toast key={shipment.detail_id} className="m-3 w-100">
+                    <Toast
+                      key={shipment.detail_id}
+                      className="m-3 w-100 bg-danger"
+                    >
                       <ToastHeader className="text-center h5">
                         Shipment Details - {shipment.detail_id}
                       </ToastHeader>
                       <ToastBody>
                         <Row key={shipment.detail_id}>
                           <Row>
-                            <Row className="m-2 border bg-white shadow">
+                            <Row className="m-3 border bg-white shadow rounded">
                               <Row className="m-3">
                                 <Col className="h6 text-muted">Carrier:</Col>
                                 <Col className="h6">{shipment.carrier}</Col>
@@ -151,61 +150,77 @@ const DeleteContentsUI = ({
                               </Row>
                             </Row>
 
-                            <Col className="m-3 border bg-white shadow">
-                              <Row className="m-3 w-100">
-                                <Col className="h6 text-muted">Ship Date:</Col>
-                                <Col className="h6">{shipment.ship_date}</Col>
-                              </Row>
-                              <Row className="m-3 w-100">
-                                <Col className="h6 text-muted">
-                                  Estimate Delivery:
-                                </Col>
-                                <Col className="h6">
-                                  {shipment.delivery_estimate}
-                                </Col>
-                              </Row>
-                              <Row className="m-3 w-100">
-                                <Col className="h6 text-muted">Ship Date:</Col>
-                                <Col className="h6">{shipment.ship_date}</Col>
-                              </Row>
-                            </Col>
-                            <Col className="m-3 border bg-white shadow">
-                              <Row className="m-3 w-100">
-                                <Col className="h6 text-muted">Name:</Col>
-                                <Col className="h6">{shipment.name}</Col>
-                              </Row>
-                              <Row className="m-3 w-100">
-                                <Col className="h6 text-muted">
-                                  Email Address:
-                                </Col>
-                                <Col className="h6">
-                                  {shipment.email_address}
-                                </Col>
-                              </Row>
-                              <Row className="m-3 w-100">
-                                <Col className="h6 text-muted">Phone:</Col>
-                                <Col className="h6">{shipment.phone}</Col>
-                              </Row>
-                            </Col>
-                            <Col className="m-3 border bg-white shadow">
-                              <Row className="m-3">
-                                <Col className="h6 text-muted">Country:</Col>
-                                <Col className="h6">{shipment.country}</Col>
-                              </Row>
-                              <Row className="m-3">
-                                <Col className="h6 text-muted">City:</Col>
-                                <Col className="h6">{shipment.city}</Col>
-                              </Row>
-                              <Row className="m-3">
-                                <Col className="h6 text-muted">
-                                  Address Line:
-                                </Col>
-                                <Col className="h6">
-                                  {shipment.address_line_1}
-                                </Col>
-                              </Row>
-                            </Col>
-                            <Row className="m-2 border bg-white shadow">
+                            <Row className="mx-2">
+                              <Col
+                                
+                                className="my-3 mx-3 border bg-white shadow rounded"
+                              >
+                                <Row className="m-3 w-100">
+                                  <Col className="h6 text-muted">
+                                    Ship Date:
+                                  </Col>
+                                  <Col className="h6">{shipment.ship_date}</Col>
+                                </Row>
+                                <Row className="m-3 w-100">
+                                  <Col className="h6 text-muted">
+                                    Estimate Delivery:
+                                  </Col>
+                                  <Col className="h6">
+                                    {shipment.delivery_estimate}
+                                  </Col>
+                                </Row>
+                                <Row className="m-3 w-100">
+                                  <Col className="h6 text-muted">
+                                    Ship Date:
+                                  </Col>
+                                  <Col className="h6">{shipment.ship_date}</Col>
+                                </Row>
+                              </Col>
+                              <Col
+                               
+                                className="my-3 mx-2 border bg-white shadow rounded"
+                              >
+                                <Row className="m-3 w-100">
+                                  <Col className="h6 text-muted">Name:</Col>
+                                  <Col className="h6">{shipment.name}</Col>
+                                </Row>
+                                <Row className="m-3 w-100">
+                                  <Col className="h6 text-muted">
+                                    Email Address:
+                                  </Col>
+                                  <Col className="h6">
+                                    {shipment.email_address}
+                                  </Col>
+                                </Row>
+                                <Row className="m-3 w-100">
+                                  <Col className="h6 text-muted">Phone:</Col>
+                                  <Col className="h6">{shipment.phone}</Col>
+                                </Row>
+                              </Col>
+                              <Col
+                              
+                                className="my-3 mx-2 border bg-white shadow rounded"
+                              >
+                                <Row className="m-3">
+                                  <Col className="h6 text-muted">Country:</Col>
+                                  <Col className="h6">{shipment.country}</Col>
+                                </Row>
+                                <Row className="m-3">
+                                  <Col className="h6 text-muted">City:</Col>
+                                  <Col className="h6">{shipment.city}</Col>
+                                </Row>
+                                <Row className="m-3">
+                                  <Col className="h6 text-muted">
+                                    Address Line:
+                                  </Col>
+                                  <Col className="h6">
+                                    {shipment.address_line_1}
+                                  </Col>
+                                </Row>
+                              </Col>
+                            </Row>
+
+                            <Row className="bg-light rounded m-3">
                               <Row className="m-3">
                                 <Col className="h6 text-muted">
                                   Address Line 1:
@@ -262,17 +277,18 @@ const DeleteContentsUI = ({
                 id={order.root_id}
                 onClick={() => handleDisplay(order.root_id)}
                 className={`${hubCSS.pointer}`}
+                color="danger"
               >
                 {activateDisplay(order.root_id)?.arrowSide}
               </Badge>
             </Container>
             <div className="mb-5 text-center">
-              <Button
+              <button
                 onClick={() => setConfirmBoxData(order.root_id)}
-                className={"h-25 bg-danger"}
+                className={`bg-danger text-light border border-light rounded py-2 px-3 mx-2 ${hubCSS.button}`}
               >
                 x
-              </Button>
+              </button>
             </div>
             <Confirm
               open={confirmBoxData.status}

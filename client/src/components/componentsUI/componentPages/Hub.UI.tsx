@@ -5,11 +5,11 @@ import { ConfigureBoxWithHover } from "../componentUIParts/HubUIParts/Hub.UI.Ele
 import { useAppDispatch } from "../../../redux/stores/hooks";
 import { toggleSideBar } from "../../../redux/slices/PagesSlices";
 
-interface HubUIProps{
+interface HubUIProps {
   rootAccess: boolean;
 }
 
-const HUB_UI = ({rootAccess}: HubUIProps) => {
+const HUB_UI = ({ rootAccess }: HubUIProps) => {
   const dispatch = useAppDispatch();
   const toggleSideMenu = () => {
     dispatch(toggleSideBar("-15%"));
@@ -29,16 +29,18 @@ const HUB_UI = ({rootAccess}: HubUIProps) => {
             </Link>
           </div>
         </div>
-        {
-         !rootAccess ? null : <div>
-          <div>
-            <Link className={`${hubCss.linkBoxes} text-center`} to="/admin/management">
-              <Container className={`h2 text-light ${hubCss.box5}`}>Manage Admin Users</Container>
+        {!rootAccess ? null : (
+          <div className={hubCss.linkBoxes}>
+            <Link to="/admin/management">
+            <Container className={`${hubCss.configureBox}`}>
+              <Container className={`${hubCss.configureText}`}>
+                Manage Admin Users
+              </Container>
+            </Container>
             </Link>
+            
           </div>
-        </div>
-        }
-        
+        )}
         <div className={hubCss.flexBox}>
           <div className={`${hubCss.linkBoxes} text-center`}>
             <Link to="/admin/updateContents">

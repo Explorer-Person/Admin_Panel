@@ -13,11 +13,11 @@ export const ConfigureBoxWithHover = ({ text, index }: text) => {
     <Container
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      className={`w-75 ${hubCss.configureBox} ${
+      className={`${hubCss.configureBox} ${
         hover ? hubCss[`box${index}`] : false
       }`}
     >
-      <Container className="h3">{text}</Container>
+      <Container className={`${hubCss.configureText}`}>{text}</Container>
     </Container>
   );
 };

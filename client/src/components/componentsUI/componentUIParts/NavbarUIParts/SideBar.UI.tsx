@@ -12,8 +12,8 @@ const SideBarUI = ({handleLogout}: SidebarUIProps) => {
 
     const sideBarLeft = useAppSelector((state: RootState)=> state.PagesReducer.sideBarLeft);
   return (
-    <div style={{ right: sideBarLeft }} className={`${hubCSS.sideBar}`}>
-      <div className="text-center border-bottom">
+    <div style={{ right: sideBarLeft, zIndex: "2"}} className={`${hubCSS.sideBar}`}>
+      <div style={{marginTop: "90%"}} className="text-center border-bottom">
         <img className="w-25 h-25 rounded-circle my-3 mb-4" src="/public/logos/adminPhoto.png" alt="" />
         <div></div>
       </div>

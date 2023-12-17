@@ -155,22 +155,22 @@ const SuperUserSettings = ({
           </Row>
           {superUserContents.map((userContent) => (
             <div className={`${hubCSS.userPageContainer}`} key={userContent.id}>
-              <Container style={{ width: "90%" }}>
+              <Container style={{ width: "95%", marginRight: "4%"  }}>
                 {userContent.element}
               </Container>
               <Container
-                style={{ width: "10%" }}
-                className="d-flex justify-content-center"
+                style={{ width: "5%", height: "5%" }}
+                className="d-flex justify-content-center mt-4"
               >
                 <Button
                   onClick={() => handleEditButton(userContent.id)}
-                  className="bg-warning"
+                  className="bg-warning border border-light mx-1"
                 >
                   <h2>✎</h2>
                 </Button>{" "}
                 <Button
                   onClick={() => decreaseUsers(userContent.id)}
-                  className="bg-danger mx-2"
+                  className="bg-danger border border-light mx-1"
                 >
                   <h2 className="px-2">x</h2>
                 </Button>
@@ -178,20 +178,22 @@ const SuperUserSettings = ({
             </div>
           ))}
 
-          <Row className="justify-content-center">
+          <div>
+            <div className="w-100 text-center">
             <Button
-              style={{ width: "10%" }}
               onClick={increaseUsers}
-              className="bg-primary mt-3"
+              className="bg-primary border border-light mt-3 px-4"
             >
-              <h2>+</h2>
+              <h1>+</h1>
             </Button>
-          </Row>
+            </div>
+            
+          </div>
           <div className="text-center">
             <Button
               onClick={() => setConfirmBoxData("datas")}
               style={{ marginBottom: "25%" }}
-              className="mt-4 bg-dark w-50"
+              className="mt-4 bg-dark p-3"
             >
               <h1>Save Changes</h1>
             </Button>

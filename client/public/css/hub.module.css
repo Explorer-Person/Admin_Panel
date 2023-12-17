@@ -1,4 +1,6 @@
 .navbarStyle{
+  position: fixed;
+  top: 0;
   margin: 0;
   width: 100%;
 }
@@ -8,18 +10,24 @@
   width: 100%;
 }
 .flexBox{
+  position: relative;
+  gap: 1%;
   display: flex;
+  width: 100%;
+  margin: 1% auto;
+}
+.singleBox{
+  text-decoration: none;
+  height: 8rem;
+  width: 100%;
 }
 .linkBoxes{
   text-decoration: none;
   height: 8rem;
   width: 100%;
-  margin: 1%;
 }
 .configureBox{
-  display: inline-block;
-  padding: 6% 0;
-  text-align: center;
+  display: flex;
   flex-wrap: nowrap;
   text-decoration: none;
   width: 100%;
@@ -27,6 +35,14 @@
   border: 2px solid black;
   background-color: #212529;
   color: white;
+}
+.configureText{
+  position: relative;
+  font-weight: bolder;
+  font-size: x-large;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .box1:hover{
@@ -47,9 +63,14 @@
   transition: 1s;
 }
 .box5{  
+  position: relative;
   background-color: #212529;
-  padding: 4% 0;
+  padding: 6% 0;
+  font-weight: bolder;
+  font-size: x-large;
+  color: white;
   text-align: center;
+  cursor: pointer;
 }
 .box5:hover{
   background-color: #3f3f00;
@@ -78,6 +99,7 @@
 
 .sideBar{
   position: fixed;
+  top: 0;
   right: 0;
   height: 100%;
   width: 15%;
@@ -144,7 +166,7 @@
   width: 100%;
 }
 .button{
-  margin-top: 5%;
+  margin-top: 100%;
 }
 
 
@@ -162,7 +184,9 @@
     display: block;
   }
   .flexBox{
+    position: relative;
     display: block;
+    width: 100%;
   }
   .linkBoxes{
     text-decoration: none;
@@ -192,5 +216,8 @@
     border: 1px solid #282d32;
     transition: 0.5s;
     z-index: 500;
+  }
+  .button{
+    margin-top: 1%;
   }
 }
