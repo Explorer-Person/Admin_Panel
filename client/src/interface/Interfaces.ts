@@ -15,10 +15,6 @@ export interface NumberUsers{
   superuser: number;
 }
 
-export interface  UserContentIdsP {
-  id: string;
-}[]
-
 export interface UserContentsInputP{
   id: string;
   status: boolean;

@@ -9,7 +9,10 @@ import {
   useIncreaseUserInput,
   useSetInputValue,
 } from "../actions/UserSettings.A";
-import { removeUserInput } from "../../../../../redux/slices/InputSlices";
+import {
+  filterUserInput,
+  removeUserInput,
+} from "../../../../../redux/slices/InputSlices";
 import { useState, useEffect } from "react";
 import { Users } from "../../../../../interface/UserData";
 import { v4 as uuidv4 } from "uuid";
@@ -116,15 +119,17 @@ const UserSettings = ({ handleSubmitUser }: HandleSubmitUserProps) => {
     dispatch(manageConfirmBox(id));
   };
 
-  useEffect(() => { 
-     displayUsers();
+  useEffect(() => {
+    displayUsers();
   }, [dispatch, userData, displayUsers, users]);
 
-  useEffect(()=>{
-    if(users && users?.length !== userContents.length){
-     console.log("reload")
+  useEffect(() => {
+    if (users && users?.length !== userContents.length) {
+      const ids = allUserData.map((content) => content.user_id);
+      dispatch(filterUserInput(ids));
     }
-  })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allUserData]);
 
   useEffect(() => {
     dispatch(takeAllUserData(userData));
@@ -148,8 +153,13 @@ const UserSettings = ({ handleSubmitUser }: HandleSubmitUserProps) => {
           </Row>
           {userContents.map((userContent) => (
             <div className={`${hubCSS.userPageContainer}`} key={userContent.id}>
-              <Container style={{width: "90%"}}>{userContent.element}</Container>
-              <Container style={{width: "10%"}} className="d-flex justify-content-center">
+              <Container style={{ width: "90%" }}>
+                {userContent.element}
+              </Container>
+              <Container
+                style={{ width: "10%" }}
+                className="d-flex justify-content-center"
+              >
                 <Button
                   onClick={() => handleEditButton(userContent.id)}
                   className="bg-warning"
@@ -190,9 +200,9 @@ const UserSettings = ({ handleSubmitUser }: HandleSubmitUserProps) => {
               style={{
                 maxHeight: "20%",
                 textAlign: "center",
-                margin: "20% 35%",
+                margin: "20% 11%",
               }}
-              className="w-25"
+              className={`w-75`}
             />
           </div>
         </Container>

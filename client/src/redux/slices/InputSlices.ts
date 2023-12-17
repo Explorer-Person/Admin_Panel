@@ -120,6 +120,20 @@ const InputSlice = createSlice({
         return content
       });
     },
+    filterUserInput: (state, action: PayloadAction<string[]>)=>{
+      state.UserContents = state.UserContents.filter(content=>{
+        return action.payload.find(id=>{
+           return id === content.id;
+        })
+      })
+    },
+    filterSuperUserInput: (state, action: PayloadAction<string[]>)=>{
+      state.SuperUserContents = state.SuperUserContents.filter(content=>{
+        return action.payload.find(id=>{
+           return id === content.id;
+        })
+      })
+    }
 
 
     // Add more reducers as needed
@@ -139,5 +153,7 @@ export const {
   removeSuperUserInput,
   editStatusUserInput,
   editStatusSuperUserInput,
+  filterUserInput,
+  filterSuperUserInput,
 } = InputSlice.actions;
 export default InputSlice.reducer;

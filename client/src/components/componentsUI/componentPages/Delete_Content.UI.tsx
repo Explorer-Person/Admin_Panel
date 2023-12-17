@@ -282,9 +282,9 @@ const DeleteContentsUI = ({
               style={{
                 maxHeight: "20%",
                 textAlign: "center",
-                margin: "20% 35%",
+                margin: "20% 11%",
               }}
-              className="w-25"
+              className={`w-75`}
             />
           </div>
         )

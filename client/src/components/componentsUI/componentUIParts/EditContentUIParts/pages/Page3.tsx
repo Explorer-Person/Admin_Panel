@@ -264,8 +264,12 @@ export const Page3 = ({ display, handleSubmit }: DisplayP3) => {
         content="Are You Sure For Update Content"
         onCancel={() => setConfirmBoxData("")}
         onConfirm={confirmProcess}
-        style={{maxHeight: "20%", textAlign: "center", margin: "20% 35%"}}
-        className="w-25"
+        style={{
+          maxHeight: "20%",
+          textAlign: "center",
+          margin: "20% 11%",
+        }}
+        className={`w-75`}
       />
     </Container>
   );
